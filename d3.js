@@ -20,14 +20,15 @@ function createBarChart(data) {
   
     // Create the SVG container.
     const svg = d3.create("svg")
-        .attr("width", width)
+        .attr("width", "100%")
         .attr("height", height)
         .attr("viewBox", [0, 0, width, height])
-        .attr("style", "max-width: 100%; height: auto;");
+        .attr("max-width", width)
+        .attr("preserveAspectRatio", "xMidYMid meet");
   
     // Add a rect for each bar.
     svg.append("g")
-        .attr("fill", "steelblue")
+        .attr("fill", "green")
       .selectAll()
       .data(data)
       .join("rect")
@@ -75,7 +76,7 @@ function createBarChart(data) {
     { letter: '5.10d', frequency: 20 },
     { letter: '5.11a', frequency: 10 },
     { letter: '5.11b', frequency: 8 },
-    { letter: '5.11c', frequency: 4 },
+    { letter: '5.11c', frequency: 0 },
     { letter: '5.11d', frequency: 11 },
     { letter: '5.12a', frequency: 6 },
     { letter: '5.12b', frequency: 3 },
@@ -83,5 +84,5 @@ function createBarChart(data) {
     { letter: '5.12d', frequency: 10 },
   ]
 
-const chartContainer = document.getElementById('chart'); // Assuming you have a <div id="chart"></div> in your HTML
+const chartContainer = document.getElementById('chart');
 chartContainer.appendChild(createBarChart(data));
