@@ -6,6 +6,9 @@ function createBarChart(data) {
     const marginRight = 20;
     const marginBottom = 60;
     const marginLeft = 40;
+
+    //finds max frequency
+    const maxFrequency = d3.max(data, d => d.frequency);
   
     // Declare the x (horizontal position) scale.
     const x = d3.scaleBand()
@@ -35,7 +38,8 @@ function createBarChart(data) {
         .attr("x", (d) => x(d.letter))
         .attr("y", (d) => y(d.frequency))
         .attr("height", (d) => y(0) - y(d.frequency))
-        .attr("width", x.bandwidth());
+        .attr("width", x.bandwidth())
+        .attr("fill", (d) => d.frequency === maxFrequency ? "red" : "green");
   
     // Add the x-axis and label.
     svg.append("g")
@@ -48,7 +52,8 @@ function createBarChart(data) {
         .attr("y", height - 10)
         .attr("text-anchor", "middle")
         .attr("fill", "currentColor")
-        .text("Difficulty");
+        .attr("font-weight", "bold")
+        .text("DIFFICULTY");
   
     // Add the y-axis and label, and remove the domain line.
     svg.append("g")
@@ -60,7 +65,8 @@ function createBarChart(data) {
             .attr("y", 10)
             .attr("fill", "currentColor")
             .attr("text-anchor", "start")
-            .text("# Completed"));
+            .attr("font-weight", "bold")
+            .text("# COMPLETED"));
   
     // Return the SVG element.
     return svg.node();
